@@ -1,12 +1,14 @@
 import React, { Route, Routes } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import { Hero } from './components/Hero'
+import { Navbar } from './components/Navbar'
 
 function App() {
   return (
     <div className="App">
       <Navbar />
       <Routes>
-        <Route path="/" element={<div>hello</div>} />
+        {/* //TODO: create main container to put all inside */}
+        <Route path="/" element={<Hero />} />
       </Routes>
     </div>
   )

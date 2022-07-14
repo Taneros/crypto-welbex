@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './style.css'
 import { FaBars, FaTimes } from 'react-icons/fa'
 
-const Navbar = () => {
+export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false)
 
   const handleShowMenu = () => {
@@ -10,7 +10,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="header">
+    <nav className="header">
       <div className="container">
         <h1 style={{ position: 'absolute', top: '-500px', left: '-500px' }}>
           CryptoWelbeX
@@ -40,8 +40,6 @@ const Navbar = () => {
           )}
         </div>
       </div>
-    </div>
+    </nav>
   )
 }
-
-export default Navbar
