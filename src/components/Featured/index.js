@@ -221,7 +221,7 @@ export const Featured = () => {
         {/* Left */}
         <div className="left">
           <h2>
-            Открой для себя топовые криптовалюты: Bitcoin, Ethereum, и Dogecoin{' '}
+            Открой для себя топовые криптовалюты: Bitcoin, Ethereum, и Dogecoin.
           </h2>
           <p>Все виды крипто: Скриптовалюты и NFT</p>
           <button className="btn">Узнать больше</button>
