@@ -47,19 +47,21 @@
 
   .nav-menu {
     position: absolute;
+    display: none;
     flex-direction: column;
     justify-content: start;
     top: 90px;
     right: -100%;
     width: 50%;
     height: 100vh;
-    transition: 0.4x;
+    transition: 0.4s;
     z-index: 2;
     background: #fff;
     border-left: 1px solid #eee;
   }
   .nav-menu.active {
     right: 0;
+    display: flex;
   }
 
   .nav-menu li {
