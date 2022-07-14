@@ -84,10 +84,12 @@
 @media screen and (max-width: 940px) {
   .featured .container {
     grid-template-columns: 1fr;
+    margin: 0 1rem;
   }
 
   .featured .left .btn {
-    align-self: 'center';
+    align-self: center;
+    width: 65%;
   }
 
   .featured {
@@ -101,5 +103,10 @@
   }
   .featured {
     clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+  }
+
+  .featured .left .btn {
+    align-self: center;
+    width: 100%;
   }
 }

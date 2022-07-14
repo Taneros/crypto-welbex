@@ -2,6 +2,7 @@ import React, { Route, Routes } from 'react-router-dom'
 import { Featured } from './components/Featured'
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
+import { Signup } from './components/Signup'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <>
               <Hero />
               <Featured />
+              <Signup />
             </>
           }
         />
