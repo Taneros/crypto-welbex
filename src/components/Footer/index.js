@@ -15,9 +15,9 @@ export const Footer = () => {
     <div className="footer">
       <div className="container">
         <div className="col col-1">
-          <h2>
+          <h3>
             Crypto<span className="primary">WelbeX</span>
-          </h2>
+          </h3>
         </div>
         <div className="col">
           <h5>Девелопер</h5>
