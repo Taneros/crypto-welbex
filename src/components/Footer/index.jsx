@@ -29,7 +29,7 @@ export const Footer = () => {
         </div>
         <div className="col">
           <h5>Контакты</h5>
-          <span className="bar"> </span>
+          <span className="bar"></span>
           <a href="https://github.com/taneros">
             <FaGithub />
             GitHub

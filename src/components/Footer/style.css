@@ -50,3 +50,20 @@
 .footer .col a {
   display: inline-block;
 }
+
+@media screen and (max-width: 940px) {
+  .footer .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer .col {
+    align-self: flex-start;
+    margin-left: calc(30%);
+  }
+}
+
+@media screen and (max-width: 478px) {
+  .footer .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

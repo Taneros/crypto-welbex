@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './style.css'
 import { FaBars, FaTimes } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -20,13 +21,13 @@ export const Navbar = () => {
         </h2>
         <ul className={showMenu ? 'nav-menu active' : 'nav-menu'}>
           <li>
-            <a href="/">Home</a>
+            <Link to="/">Домой</Link>
           </li>
           <li>
-            <a href="/">List</a>
+            <Link to="/market">Рынок</Link>
           </li>
           <li>
-            <a href="/">Contact</a>
+            <Link to="/contacts">Контакты</Link>
           </li>
         </ul>
         <div className="btn-group">
