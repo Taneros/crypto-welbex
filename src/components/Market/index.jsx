@@ -3,6 +3,7 @@ import axios from '../../api/axios'
 import { FiArrowDownRight, FiArrowUpRight, FiLifeBuoy } from 'react-icons/fi'
 import { tableData as data } from '../../api/tableData'
 import { Pagination } from '../Pagination'
+import { SelectRowFilter } from '../SelectRowFilter'
 
 const URL = '/coins/markets?vs_currency=usd'
 
@@ -13,7 +14,9 @@ export const Market = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [listOfPages, setListOfPages] = useState([])
 
-  useState(() => {
+  const [sortByRow, setSortByRow] = useState(0)
+
+  useEffect(() => {
     if (data?.length) {
       for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
         setListOfPages((prev) => [...prev, i])
@@ -41,13 +44,33 @@ export const Market = () => {
 
   const currentPageItems = tableData.slice(indexOfFirstItem, indexOfLastItem)
 
+  let filteredTable = currentPageItems
+
+  switch (sortByRow) {
+    case 1:
+      filteredTable = currentPageItems
+        .slice()
+        .sort((a, b) => a.current_price - b.current_price)
+      break
+
+    case 2:
+      filteredTable = currentPageItems
+        .slice()
+        .sort((a, b) => a.market_cap - b.market_cap)
+      break
+
+    default:
+      break
+  }
+
   return (
     <div className="container mx-auto px-4 sm:px-8">
       <div className="py-8">
-        <div>
+        <div className="flex justify-between	">
           <h2 className="text-2xl font-semibold leading-tight">
             Таблица криптовалют
           </h2>
+          <SelectRowFilter sort={{ sortByRow, setSortByRow }} />
         </div>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
@@ -78,7 +101,7 @@ export const Market = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentPageItems.map((c) => (
+                {filteredTable.map((c) => (
                   <tr className="text-base" key={c.id}>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <div className="flex">

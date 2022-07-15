@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
+import { nanoid } from 'nanoid'
 
 export const Pagination = ({ pages }) => {
+  const id = nanoid()
   const { listOfPages, setCurrentPage, currentPage } = pages
 
   const [pageNumLimit, setPageNumLimit] = useState(5)
@@ -55,8 +57,6 @@ export const Pagination = ({ pages }) => {
     )
   }
 
-  console.log(`currentPage === listOfPages[0]`, currentPage === listOfPages[0])
-
   return (
     <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
       <div>
@@ -80,8 +80,9 @@ export const Pagination = ({ pages }) => {
           {pageHellipDown}
           <ul>
             {listOfPages.map((num, idx) => {
+              const id = nanoid()
               return (
-                <Fragment key={num}>
+                <Fragment key={id}>
                   {num < maxPageLimit + 1 && num > minPageLimit ? (
                     <li
                       id={num}
