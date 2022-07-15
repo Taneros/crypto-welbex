@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import axios from '../../api/axios'
-import { FiArrowDownRight, FiArrowUpRight } from 'react-icons/fi'
+import { FiArrowDownRight, FiArrowUpRight, FiLifeBuoy } from 'react-icons/fi'
 import { tableData as data } from '../../api/tableData'
+import { Pagination } from '../Pagination'
 
 const URL = '/coins/markets?vs_currency=usd'
 
 export const Market = () => {
   const [tableData, setTableData] = useState([])
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [itemsPerPage, setItemsPerPage] = useState(10)
+  const [listOfPages, setListOfPages] = useState([])
+
+  useState(() => {
+    if (data?.length) {
+      for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
+        setListOfPages((prev) => [...prev, i])
+      }
+    }
+  }, [data.length])
 
   const getTableData = async () => {
     try {
@@ -21,6 +34,12 @@ export const Market = () => {
     // getTableData()
     setTableData([...data])
   }, [])
+
+  const indexOfLastItem = currentPage * itemsPerPage
+
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+
+  const currentPageItems = tableData.slice(indexOfFirstItem, indexOfLastItem)
 
   return (
     <div className="container mx-auto px-4 sm:px-8">
@@ -59,7 +78,7 @@ export const Market = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map((c) => (
+                {currentPageItems.map((c) => (
                   <tr className="text-base" key={c.id}>
                     <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                       <div className="flex">
@@ -70,12 +89,9 @@ export const Market = () => {
                             className="w-full h-full rounded-full"
                           />
                         </div>
-                        <div className="ml-3">
+                        <div className="ml-3 flex flex-1 justify-start items-center">
                           <p className="text-gray-900 white-space-no-wrap text-base">
                             {c.name}
-                          </p>
-                          <p className="text-gray-900 white-space-no-wrap text-base">
-                            {c.symbol}
                           </p>
                         </div>
                       </div>
@@ -144,6 +160,7 @@ export const Market = () => {
           </div>
         </div>
       </div>
+      <Pagination pages={{ listOfPages, setCurrentPage, currentPage }} />
     </div>
   )
 }

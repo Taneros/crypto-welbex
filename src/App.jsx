@@ -1,4 +1,5 @@
 import React, { Route, Routes } from 'react-router-dom'
+import { Contacts } from './components/Contacts'
 import { Featured } from './components/Featured'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
@@ -23,6 +24,7 @@ function App() {
           }
         />
         <Route path="/market" element={<Market />} />
+        <Route path="/contacts" element={<Contacts />} />
       </Routes>
       <Footer />
     </div>
