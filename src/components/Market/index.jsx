@@ -4,6 +4,7 @@ import { FiArrowDownRight, FiArrowUpRight, FiLifeBuoy } from 'react-icons/fi'
 import { tableData as data } from '../../api/tableData'
 import { Pagination } from '../Pagination'
 import { SelectRowFilter } from '../SelectRowFilter'
+import { SelectValueFilter } from '../SelectValueFilter'
 
 const URL = '/coins/markets?vs_currency=usd'
 
@@ -15,6 +16,7 @@ export const Market = () => {
   const [listOfPages, setListOfPages] = useState([])
 
   const [sortByRow, setSortByRow] = useState(0)
+  const [sortByRowValue, setSortByRowValue] = useState(0)
 
   useEffect(() => {
     if (data?.length) {
@@ -48,15 +50,17 @@ export const Market = () => {
 
   switch (sortByRow) {
     case 1:
-      filteredTable = currentPageItems
-        .slice()
-        .sort((a, b) => a.current_price - b.current_price)
+      filteredTable = currentPageItems.slice().sort((a, b) => {
+        if (sortByRowValue === 0) return a.current_price - b.current_price
+        return b.current_price - a.current_price
+      })
       break
 
     case 2:
-      filteredTable = currentPageItems
-        .slice()
-        .sort((a, b) => a.market_cap - b.market_cap)
+      filteredTable = currentPageItems.slice().sort((a, b) => {
+        if (sortByRowValue === 0) return a.market_cap - b.market_cap
+        return b.market_cap - a.market_cap
+      })
       break
 
     default:
@@ -71,6 +75,7 @@ export const Market = () => {
             Таблица криптовалют
           </h2>
           <SelectRowFilter sort={{ sortByRow, setSortByRow }} />
+          <SelectValueFilter sort={{ sortByRowValue, setSortByRowValue }} />
         </div>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
