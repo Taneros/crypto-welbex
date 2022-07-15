@@ -30,9 +30,9 @@ export const Navbar = () => {
             <Link to="/contacts">Контакты</Link>
           </li>
         </ul>
-        <div className="btn-group">
+        {/* <div className="btn-group">
           <button className="btn">Button</button>
-        </div>
+        </div> */}
         <div className="humburger" onClick={handleShowMenu}>
           {showMenu ? (
             <FaTimes size={25} style={{ color: '#333' }} />

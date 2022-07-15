@@ -253,7 +253,7 @@ export const Featured = () => {
                 </div>
               ) : (
                 <div className="change red">
-                  <FiArrowUpRight className="icon" />
+                  <FiArrowDownRight className="icon" />
                   <span>{c.price_change_percentage_24h.toFixed(2) + '%'}</span>
                   <span
                     style={{

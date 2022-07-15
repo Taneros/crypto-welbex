@@ -2,6 +2,7 @@ import React, { Route, Routes } from 'react-router-dom'
 import { Featured } from './components/Featured'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
+import { Market } from './components/Market'
 import { Navbar } from './components/Navbar'
 import { Signup } from './components/Signup'
 
@@ -18,11 +19,12 @@ function App() {
               <Hero />
               <Featured />
               <Signup />
-              <Footer />
             </>
           }
         />
+        <Route path="/market" element={<Market />} />
       </Routes>
+      <Footer />
     </div>
   )
 }
