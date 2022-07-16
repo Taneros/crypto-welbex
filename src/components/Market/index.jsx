@@ -5,6 +5,8 @@ import { tableData as data } from '../../api/tableData'
 import { Pagination } from '../Pagination'
 import { SelectRowFilter } from '../SelectRowFilter'
 import { SelectValueFilter } from '../SelectValueFilter'
+import { Search } from '../Search'
+import useDebounce from '../../utils/useDebounce'
 
 const URL = '/coins/markets?vs_currency=usd'
 
@@ -17,6 +19,7 @@ export const Market = () => {
 
   const [sortByRow, setSortByRow] = useState(0)
   const [sortByRowValue, setSortByRowValue] = useState(0)
+  const [searchTable, setSearchTable] = useState('')
 
   useEffect(() => {
     if (data?.length) {
@@ -24,7 +27,7 @@ export const Market = () => {
         setListOfPages((prev) => [...prev, i])
       }
     }
-  }, [data.length])
+  }, [data?.length])
 
   const getTableData = async () => {
     try {
@@ -40,6 +43,25 @@ export const Market = () => {
     setTableData([...data])
   }, [])
 
+  // Search Table
+  const debouncedSearch = useDebounce(searchTable, 500)
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      console.log(`search`, debouncedSearch)
+      const reg = new RegExp(`${debouncedSearch}`, 'g')
+      setTableData((prev) => {
+        const searchedData = prev.filter((item) =>
+          reg.test(item.name.toLowerCase())
+        )
+        if (searchedData.length > 0) return searchedData
+        console.log(`not found`)
+        return [...data]
+      })
+    } else setTableData([...data])
+  }, [debouncedSearch])
+
+  //  Pagination Setup
   const indexOfLastItem = currentPage * itemsPerPage
 
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
@@ -47,6 +69,8 @@ export const Market = () => {
   const currentPageItems = tableData.slice(indexOfFirstItem, indexOfLastItem)
 
   let filteredTable = currentPageItems
+
+  // Sorting by Rows + Value Asc / Desc
 
   switch (sortByRow) {
     case 1:
@@ -76,6 +100,7 @@ export const Market = () => {
           </h2>
           <SelectRowFilter sort={{ sortByRow, setSortByRow }} />
           <SelectValueFilter sort={{ sortByRowValue, setSortByRowValue }} />
+          <Search search={{ searchTable, setSearchTable }} />
         </div>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
           <div className="inline-block min-w-full shadow-md rounded-lg overflow-hidden">
